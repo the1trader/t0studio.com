@@ -21,7 +21,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Display:wght@600&display=swap" rel="stylesheet" />
   <style>
     :root {
       color-scheme: light dark;
@@ -60,6 +60,8 @@
         --success: #91d997;
         --shadow: 0 26px 80px rgba(0, 0, 0, .36);
       }
+      .brand svg [stroke="#10120f"] { stroke: #b7ff3c; }
+      .brand svg [fill="#10120f"] { fill: #b7ff3c; }
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -96,11 +98,17 @@
       justify-content: space-between;
       gap: 20px;
     }
-    .brand { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; font: 500 13px/1 var(--font-mono); letter-spacing: -.04em; }
-    .brand::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent); }
+    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand svg { width: 30px; height: 30px; flex: none; }
+    .brand-word { font-family: "Noto Sans Display", var(--font-sans); font-weight: 600; font-size: 19px; letter-spacing: -.02em; color: var(--ink); line-height: 1; }
     .nav-links { display: flex; align-items: center; gap: 21px; }
     .nav-links > a:not(.button) { text-decoration: none; font-size: 12px; font-weight: 700; color: var(--muted); }
     .nav-links > a:not(.button):hover { color: var(--ink); }
+    .nav-toggle { display: none; width: 42px; height: 42px; flex: none; border: 1px solid var(--line); border-radius: 10px; background: transparent; cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 5px; }
+    .nav-toggle span { display: block; width: 18px; height: 2px; border-radius: 2px; background: var(--ink); transition: transform .2s ease; }
+    .nav-toggle[aria-expanded="true"] span:first-child { transform: translateY(3.5px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+    .mobile-menu { display: none; }
     .button {
       min-height: 46px;
       padding: 0 18px;
@@ -192,6 +200,7 @@
     .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .project { overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-m); background: var(--surface); }
     .project-visual { min-height: 290px; padding: 22px; position: relative; overflow: hidden; background: var(--dark); }
+    .project-shot { width: 100%; aspect-ratio: 8/5; object-fit: cover; object-position: top center; display: block; border-radius: 8px; border: 1px solid rgba(255,255,255,.09); background: #0d100c; }
     .project-visual::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent 0 54px, rgba(255,255,255,.035) 55px), radial-gradient(circle at 78% 22%, rgba(183,255,60,.24), transparent 24%); }
     .project:nth-child(2) .project-visual::before { background: repeating-radial-gradient(circle at 68% 50%, transparent 0 29px, rgba(255,255,255,.07) 30px 31px); }
     .project:nth-child(3) .project-visual::before { background: linear-gradient(135deg, transparent 25%, rgba(183,255,60,.15) 26%, transparent 27%, transparent 51%, rgba(255,255,255,.08) 52%, transparent 53%); }
@@ -219,6 +228,8 @@
     .review-person span { display: block; margin-top: 7px; color: var(--muted); font: 400 10px/1.45 var(--font-mono); }
     .review-quote { margin: 0; font-size: clamp(27px, 4vw, 46px); line-height: 1.18; letter-spacing: -.04em; }
     .review-quote.pending { color: var(--muted); font-size: clamp(24px, 3vw, 36px); }
+    .testimonial:has(.review-quote.pending) { padding: 24px 30px; align-items: center; gap: 32px; }
+    .testimonial:has(.review-quote.pending) .review-quote.pending { font-size: 17px; letter-spacing: -.01em; line-height: 1.5; }
     .result-grid { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 16px; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
     .result-note { min-height: 166px; padding: 22px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .result-note b { display: block; color: var(--muted); font: 500 10px/1.4 var(--font-mono); }
@@ -254,7 +265,7 @@
     details[open] summary span:last-child { transform: rotate(45deg); }
     details p { max-width: 760px; margin: -3px 44px 26px; color: var(--muted); line-height: 1.7; }
 
-    .audit-section { padding: 28px 0 112px; scroll-margin-top: 0; }
+    .audit-section { padding: 28px 0 112px; scroll-margin-top: 88px; }
     .audit-wrap { overflow: hidden; border-radius: var(--radius-l); background: var(--accent); color: var(--accent-ink); display: grid; grid-template-columns: .88fr 1.12fr; }
     .audit-copy { padding: 54px; }
     .audit-copy .section-label { color: #425413; }
@@ -320,6 +331,11 @@
 
     @media (max-width: 980px) {
       .nav-links > a:not(.button) { display: none; }
+      .nav-toggle { display: inline-flex; }
+      .mobile-menu { position: absolute; top: calc(100% + 8px); left: 0; right: 0; display: none; flex-direction: column; gap: 2px; padding: 8px; border: 1px solid color-mix(in srgb, var(--line) 82%, transparent); border-radius: var(--radius-m); background: color-mix(in srgb, var(--bg) 94%, transparent); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: var(--shadow); z-index: 31; }
+      .mobile-menu.open { display: flex; }
+      .mobile-menu a { padding: 13px 14px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 700; color: var(--ink); }
+      .mobile-menu a:hover { background: color-mix(in srgb, var(--ink) 7%, transparent); }
       .hero { grid-template-columns: 1fr; min-height: 0; padding-top: 72px; }
       .hero-visual { min-height: 520px; }
       .trust-inner { grid-template-columns: repeat(2, 1fr); }
@@ -394,7 +410,7 @@
 </head>
 <body>
   <nav class="nav" aria-label="Primary navigation">
-    <a class="brand" href="#top">t0-studio</a>
+    <a class="brand" href="#top" aria-label="t0-studio home"><svg viewBox="0 0 400 400" aria-hidden="true"><g><g stroke="#10120f" stroke-width="26" stroke-linecap="round"><line x1="296" y1="222" x2="352" y2="222"/><line x1="152" y1="138.9" x2="112" y2="72"/><line x1="152" y1="305.1" x2="112" y2="372"/></g><path d="M 296 222 L 248 305.1 L 152 305.1 L 104 222 L 152 138.9 L 248 138.9 Z" fill="none" stroke="#10120f" stroke-width="40" stroke-linejoin="round"/><circle cx="352" cy="222" r="24" fill="#10120f"/><circle cx="112" cy="72" r="24" fill="#10120f"/><circle cx="112" cy="372" r="24" fill="#10120f"/><rect x="183" y="170" width="34" height="104" rx="17" fill="#10120f"/><rect x="150" y="190" width="100" height="34" rx="17" fill="#10120f"/></g></svg><span class="brand-word">t0-studio</span></a>
     <div class="nav-links">
       <a href="#services">Services</a>
       <a href="#work">Work</a>
@@ -402,6 +418,14 @@
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
       <a class="button accent" href="#audit">Get a free audit <span class="arrow" aria-hidden="true">↗</span></a>
+    </div>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu"><span></span><span></span></button>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
     </div>
   </nav>
 
@@ -509,19 +533,19 @@
           </div>
           <div class="project-grid">
             <article class="project">
-              <div class="project-visual"><div class="browser-frame" aria-hidden="true"><div class="browser-bar"><i></i><i></i><i></i></div><div class="browser-content"><div class="wire-copy"><i></i><i></i><i></i><i></i></div><div class="wire-art"></div></div></div></div>
+              <div class="project-visual"><img class="project-shot" src="assets/work-blackhatgolf.jpg" alt="Screenshot of the blackhatgolf.org homepage" loading="lazy" /></div>
               <div class="project-body"><div class="project-meta"><span>GOLF / DIGITAL PLATFORM</span><span>01 / 04</span></div><h3>blackhatgolf.org</h3><p>A dedicated web presence for a golf education brand, structured to present its offer and guide visitors toward the program.</p><a class="project-link" href="https://blackhatgolf.org" target="_blank" rel="noopener noreferrer">Visit live site ↗</a></div>
             </article>
             <article class="project">
-              <div class="project-visual"><div class="browser-frame" aria-hidden="true"><div class="browser-bar"><i></i><i></i><i></i></div><div class="browser-content"><div class="wire-copy"><i></i><i></i><i></i><i></i></div><div class="wire-art"></div></div></div></div>
+              <div class="project-visual"><img class="project-shot" src="assets/work-themeechaimethod.jpg" alt="Screenshot of the themeechaimethod.com homepage" loading="lazy" /></div>
               <div class="project-body"><div class="project-meta"><span>METHOD / PROGRAM SITE</span><span>02 / 04</span></div><h3>themeechaimethod.com</h3><p>A focused, responsive site that organizes the Meechai Method and gives the program a clear digital home.</p><a class="project-link" href="https://themeechaimethod.com" target="_blank" rel="noopener noreferrer">Visit live site ↗</a></div>
             </article>
             <article class="project">
-              <div class="project-visual"><div class="browser-frame" aria-hidden="true"><div class="browser-bar"><i></i><i></i><i></i></div><div class="browser-content"><div class="wire-copy"><i></i><i></i><i></i><i></i></div><div class="wire-art"></div></div></div></div>
+              <div class="project-visual"><img class="project-shot" src="assets/work-edgeai.jpg" alt="Screenshot of the edgeai.trading homepage" loading="lazy" /></div>
               <div class="project-body"><div class="project-meta"><span>AI TRADING / PRODUCT SURFACE</span><span>03 / 04</span></div><h3>edgeai.trading</h3><p>A product-facing web experience for an AI-led trading brand, with a clear structure for its offer and audience.</p><a class="project-link" href="https://edgeai.trading" target="_blank" rel="noopener noreferrer">Visit live site ↗</a></div>
             </article>
             <article class="project">
-              <div class="project-visual"><div class="browser-frame" aria-hidden="true"><div class="browser-bar"><i></i><i></i><i></i></div><div class="browser-content"><div class="wire-copy"><i></i><i></i><i></i><i></i></div><div class="wire-art"></div></div></div></div>
+              <div class="project-visual"><img class="project-shot" src="assets/work-guardacard.jpg" alt="Screenshot of the guardacard.com homepage" loading="lazy" /></div>
               <div class="project-body"><div class="project-meta"><span>PAID WEBSITE REMAKE</span><span>04 / 04</span></div><h3>guardacard.com</h3><p>A paid website remake covering the information structure, interface, and responsive presentation.</p><a class="project-link" href="https://guardacard.com" target="_blank" rel="noopener noreferrer">Visit live site ↗</a></div>
             </article>
           </div>
@@ -661,6 +685,19 @@
 
   <script>
     (function () {
+      var navToggle = document.querySelector(".nav-toggle");
+      var mobileMenu = document.getElementById("mobileMenu");
+      function setMenu(open) {
+        mobileMenu.classList.toggle("open", open);
+        navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+        navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      }
+      if (navToggle && mobileMenu) {
+        navToggle.addEventListener("click", function () { setMenu(!mobileMenu.classList.contains("open")); });
+        mobileMenu.addEventListener("click", function (event) { if (event.target.closest("a")) { setMenu(false); } });
+        document.addEventListener("keydown", function (event) { if (event.key === "Escape" && mobileMenu.classList.contains("open")) { setMenu(false); navToggle.focus(); } });
+      }
+
       var priceText = function (value) { return value || "Pricing to be set"; };
       Array.prototype.forEach.call(document.querySelectorAll('[data-price="seo"]'), function (node) { node.textContent = priceText(SEO_PRICE); });
       Array.prototype.forEach.call(document.querySelectorAll('[data-price="smm"]'), function (node) { node.textContent = priceText(SMM_PRICE); });
