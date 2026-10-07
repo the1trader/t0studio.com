@@ -143,22 +143,8 @@ a[aria-disabled="true"] { cursor: not-allowed; text-decoration-style: dotted; op
 .visual-tag { position: absolute; z-index: 2; top: 18px; left: 18px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 7px; background: var(--surface); color: var(--ink); font: 500 10px/1 var(--font-mono); }
 .phone { position: relative; width: 250px; height: 520px; border-radius: 38px; background: #0d100c; padding: 12px; box-shadow: 0 30px 60px rgba(13,16,12,.35), inset 0 0 0 2px #2a3026; }
 .phone-notch { position: absolute; top: 22px; left: 50%; transform: translateX(-50%); width: 92px; height: 24px; border-radius: 12px; background: #0d100c; z-index: 3; }
-.phone-screen { position: absolute; inset: 12px; border-radius: 28px; background: #f3f4ee; padding: 52px 16px 16px; opacity: 0; transform: translateX(26px); transition: opacity .5s ease, transform .5s ease; overflow: hidden; }
-.phone-screen.active { opacity: 1; transform: none; }
-.ps-head { margin: 0 0 12px; font-size: 15px; font-weight: 800; color: #10120f; }
-.ps-head span { display: block; margin-top: 3px; font-size: 11px; font-weight: 600; color: #596057; }
-.ps-head.center { text-align: center; }
-.ps-opt { margin: 0 0 8px; padding: 12px; border-radius: 12px; background: #fff; border: 1px solid #dfe3da; font-size: 13px; font-weight: 700; color: #10120f; display: flex; justify-content: space-between; }
-.ps-opt span { font-weight: 600; color: #596057; font-size: 11px; }
-.ps-opt.sel { border-color: #10120f; box-shadow: 0 0 0 1px #10120f; }
-.ps-slots { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-.ps-slots span { padding: 10px 4px; text-align: center; border-radius: 10px; background: #fff; border: 1px solid #dfe3da; font-size: 12px; font-weight: 700; color: #10120f; }
-.ps-slots .sel { background: #b7ff3c; border-color: #b7ff3c; }
-.ps-done { width: 62px; height: 62px; margin: 34px auto 14px; border-radius: 50%; background: #b7ff3c; color: #10120f; font-size: 30px; display: flex; align-items: center; justify-content: center; }
-.ps-ref { text-align: center; font: 500 11px/1 var(--font-mono); color: #596057; }
-.phone-dots { position: absolute; bottom: 24px; left: 0; right: 0; display: flex; gap: 6px; justify-content: center; z-index: 3; }
-.phone-dots span { width: 6px; height: 6px; border-radius: 50%; background: rgba(16,18,15,.22); }
-.phone-dots span.on { background: #10120f; }
+.phone-screen { position: absolute; inset: 12px; border-radius: 28px; background: #f3f4ee; overflow: hidden; }
+.phone-screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .trust-band { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); }
 .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 34px 0 8px; }
 .stat b { display: block; font-size: clamp(38px, 8vw, 54px); font-weight: 800; letter-spacing: -.04em; }
@@ -480,25 +466,12 @@ html { scroll-behavior: auto; }
         </div>
         <div class="hero-visual">
           <div class="phone" aria-label="Demo: Hair Garden booking flow">
+            <div class="phone-screen">
+              <video id="bookingLoop" muted loop autoplay playsinline preload="auto" aria-label="Screen recording of the real Hair Garden booking flow"></video>
+            </div>
             <div class="phone-notch" aria-hidden="true"></div>
-            <div class="phone-screen active">
-              <p class="ps-head">Hair Garden <span>Choose a service</span></p>
-              <p class="ps-opt">Haircut <span>45 min</span></p>
-              <p class="ps-opt sel">Colour <span>90 min</span></p>
-              <p class="ps-opt">Treatment <span>60 min</span></p>
-            </div>
-            <div class="phone-screen">
-              <p class="ps-head">Pick a time <span>Tomorrow</span></p>
-              <div class="ps-slots"><span>10:00</span><span class="sel">11:30</span><span>13:00</span><span>15:30</span><span>17:00</span><span>18:30</span></div>
-            </div>
-            <div class="phone-screen">
-              <p class="ps-done">&#10003;</p>
-              <p class="ps-head center">Booking confirmed <span>Colour &middot; Tomorrow 11:30</span></p>
-              <p class="ps-ref">Ref HG-8X2K</p>
-            </div>
-            <div class="phone-dots" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
           </div>
-          <div class="visual-tag">LIVE BOOKING FLOW</div>
+          <div class="visual-tag">REAL BOOKING FLOW</div>
         </div>
       </div>
 
@@ -902,9 +875,10 @@ html { scroll-behavior: auto; }
       els.forEach(function (el) { io.observe(el); });
     })();
 </script>
+<script src="assets/booking-loop.js"></script>
 <script>
-/* Hero phone mockup: cycle booking-flow screens */
-(function(){var s=document.querySelectorAll(".phone-screen"),d=document.querySelectorAll(".phone-dots span"),i=0;if(!s.length)return;setInterval(function(){s[i].classList.remove("active");d[i].classList.remove("on");i=(i+1)%s.length;s[i].classList.add("active");d[i].classList.add("on");},2800);})();
+/* Hero phone: play the recorded real booking-flow loop */
+(function(){var v=document.getElementById("bookingLoop");if(!v||!window.__BOOKING_LOOP){return;}v.src=window.__BOOKING_LOOP;var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(reduce){v.removeAttribute("autoplay");}else{var p=v.play();if(p&&p.catch){p.catch(function(){});}}})();
 </script>
 </body>
 </html>
