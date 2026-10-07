@@ -170,14 +170,17 @@ section { padding: 112px 0; scroll-margin-top: 88px; }
 .section-head { display: grid; grid-template-columns: .68fr 1.32fr; gap: 44px; align-items: start; margin-bottom: 52px; }
 h2 { margin: 0; max-width: 790px; font-size: clamp(38px, 5vw, 66px); line-height: 1.03; letter-spacing: -.055em; font-weight: 650; }
 .section-intro { max-width: 650px; margin: 21px 0 0; color: var(--muted); font-size: 16px; line-height: 1.7; }
-.p-icon{width:26px;height:26px;color:var(--accent-ink);background:var(--accent);border-radius:8px;padding:5px;flex:none}
-.problem-item{display:flex;align-items:center;gap:12px}
+.p-icon{width:44px;height:44px;flex:none;display:grid;place-items:center;color:var(--accent-ink);background:var(--accent);border-radius:12px}
+.p-icon svg{width:22px;height:22px}
+.problem-item{display:flex;gap:14px;align-items:flex-start;padding:18px;border:1px solid var(--line);border-radius:var(--radius-m);background:var(--surface);box-shadow:var(--shadow)}
+.p-copy b{display:inline-block;padding:4px 9px;border-radius:99px;background:var(--surface-2);font:500 10px/1 var(--font-mono);color:var(--muted)}
+.p-copy p{margin:8px 0 0;font-size:17px;line-height:1.45;letter-spacing:-.01em}
 .problem { padding: 92px 0 40px; }
 .problem-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 70px; align-items: start; }
-.problem-list { border-top: 1px solid var(--line); }
-.problem-item { display: grid; grid-template-columns: 34px 1fr; gap: 15px; padding: 21px 0; border-bottom: 1px solid var(--line); align-items: start; }
-.problem-item b { width: 25px; height: 25px; display: grid; place-items: center; border-radius: 50%; background: var(--surface-2); font: 500 10px/1 var(--font-mono); }
-.problem-item p { margin: 0; font-size: 18px; line-height: 1.45; }
+.problem-list{display:grid;gap:12px}
+
+
+
 .pivot { margin-top: 24px; color: var(--ink); font-size: 21px; font-weight: 800; }
 .services { background: var(--bg); color: var(--ink); }
 .section-dark { background: var(--dark); color: var(--dark-ink); }
@@ -521,9 +524,9 @@ html { scroll-behavior: auto; }
           </div>
           <div>
             <div class="problem-list">
-              <div class="problem-item" data-reveal><svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><b>01</b><p>Invisible on Google.</p></div>
-              <div class="problem-item" data-reveal><svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg><b>02</b><p>Confusing on a phone.</p></div>
-              <div class="problem-item" data-reveal><svg class="p-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 3l7 18 2.5-7.5L21 11z"/></svg><b>03</b><p>No clear next step for the visitor.</p></div>
+              <div class="problem-item" data-reveal><span class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span><div class="p-copy"><b>01</b><p>Invisible on Google.</p></div></div>
+              <div class="problem-item" data-reveal><span class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span><div class="p-copy"><b>02</b><p>Confusing on a phone.</p></div></div>
+              <div class="problem-item" data-reveal><span class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 3l7 18 2.5-7.5L21 11z"/></svg></span><div class="p-copy"><b>03</b><p>No clear next step for the visitor.</p></div></div>
             </div>
             <p class="pivot" data-reveal>We build websites that sell.</p>
           </div>
