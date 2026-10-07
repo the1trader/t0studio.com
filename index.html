@@ -116,6 +116,7 @@ transition: opacity .2s ease, transform .2s ease;
 .button.ghost { border: 1px solid var(--line-strong); background: transparent; color: var(--ink); }
 .button.dark { background: var(--accent-ink); color: var(--accent); }
 .button[hidden] { display: none; }
+.back-link[hidden] { display: none; }
 .button[aria-disabled="true"] { opacity: .48; cursor: not-allowed; }
 .arrow { font-size: 17px; line-height: 1; }
 .hero {
@@ -333,7 +334,7 @@ section { padding: 82px 0; }
 .proof-row { display: grid; }
 .problem-grid, .section-head { grid-template-columns: 1fr; gap: 22px; }
 .section-head { margin-bottom: 39px; }
-.service-row { padding: 27px 0; gap: 16px 13px; }
+.service-row { padding: 0 0 27px; gap: 16px 13px; }
 .service-copy p { font-size: 14px; }
 .project-visual { min-height: 245px; padding: 12px; }
 .testimonial { padding: 28px; grid-template-columns: 1fr; gap: 30px; border-radius: 20px; }
@@ -362,6 +363,7 @@ body.route-audit .audit-wrap { min-height: calc(100vh - 20px); }
 .hero-actions .button { width: 100%; }
 .text-link { text-align: center; padding: 5px; }
 .hero-visual { min-height: 400px; }
+.visual-tag { top: auto; bottom: 14px; left: 14px; }
 .project-body { padding: 22px; }
 .result-grid { grid-template-columns: 1fr; }
 .result-note { min-height: 135px; }
