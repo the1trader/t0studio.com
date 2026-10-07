@@ -258,9 +258,9 @@ details p { max-width: 760px; margin: -3px 44px 26px; color: var(--muted); line-
 .field { display: grid; gap: 8px; min-width: 0; }
 .field.full { grid-column: 1 / -1; }
 label, legend { color: var(--muted); font: 500 10px/1.3 var(--font-mono); }
-input, textarea { width: 100%; min-width: 0; border: 1px solid var(--line); border-radius: 9px; background: var(--bg); color: var(--ink); padding: 13px 14px; outline: none; }
+input, textarea, select { width: 100%; min-width: 0; border: 1px solid var(--line); border-radius: 9px; background: var(--bg); color: var(--ink); padding: 13px 14px; outline: none; }
 textarea { min-height: 105px; resize: vertical; }
-input:focus, textarea:focus { border-color: var(--line-strong); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 24%, transparent); }
+input:focus, textarea:focus, select:focus { border-color: var(--line-strong); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 24%, transparent); }
 .check-row { display: flex; align-items: center; gap: 10px; min-height: 38px; }
 .check-row input { width: 18px; height: 18px; accent-color: var(--ink); }
 .check-row label { color: var(--ink); font-family: var(--font-sans); font-size: 13px; font-weight: 700; }
@@ -663,7 +663,7 @@ html { scroll-behavior: auto; }
                   <div class="field"><label for="businessName">BUSINESS NAME</label><input id="businessName" name="business" autocomplete="organization" required /><span class="field-error" id="businessError"></span></div>
                   <div class="field full"><label for="websiteUrl">WEBSITE URL</label><input id="websiteUrl" name="website" type="url" inputmode="url" placeholder="https://" /><span class="field-error" id="websiteError"></span></div>
                   <div class="field full"><div class="check-row"><input id="noWebsite" name="noWebsite" type="checkbox" /><label for="noWebsite">I don't have a website yet</label></div></div>
-                  <div class="field full"><label for="contact">TELEGRAM OR PHONE</label><input id="contact" name="contact" autocomplete="tel" required /><span class="field-error" id="contactError"></span></div>
+                  <div class="field full"><label for="contact">TELEGRAM OR PHONE</label><input id="contact" name="contact" autocomplete="tel" required /><span class="field-error" id="contactError"></span></div><div class="field"><label for="teamSize">TEAM SIZE</label><select id="teamSize" name="team_size" required><option value="" selected disabled>Select…</option><option>တစ်ယောက်တည်း</option><option>2-5</option><option>6-20</option><option>20+</option></select><span class="field-error" id="teamSizeError"></span></div><div class="field"><label for="businessAge">BUSINESS LIFESPAN</label><select id="businessAge" name="business_age" required><option value="" selected disabled>Select…</option><option>1 နှစ်အောက်</option><option>1–3 နှစ်</option><option>3 နှစ်အထက်</option></select><span class="field-error" id="businessAgeError"></span></div>
                   <div class="field full"><label for="message">MESSAGE <span aria-hidden="true">(OPTIONAL)</span></label><textarea id="message" name="message" placeholder="What do you want the website to do better?"></textarea></div>
                 </div>
                 <div class="submit-row"><button class="button dark" id="submitAudit" type="submit">Get a free audit <span class="arrow" aria-hidden="true">↗</span></button></div>
@@ -690,7 +690,7 @@ html { scroll-behavior: auto; }
       <div class="section-label">PRIVACY</div>
       <h1>Your audit details stay tied to your request.</h1>
       <h2>What we collect</h2>
-      <p>The audit form collects your name, business name, website status or URL, Telegram or phone contact, and any optional message you add.</p>
+      <p>The audit form collects your name, business name, website status or URL, Telegram or phone contact, team size, business lifespan, and any optional message you add.</p>
       <h2>Why we collect it</h2>
       <p>We use the information to review your website or market opportunity, prepare the free audit, contact you about it, and scope a quote if the work is a fit.</p>
       <h2>How to ask for deletion</h2>
@@ -789,7 +789,7 @@ html { scroll-behavior: auto; }
       } else { mobileBar.classList.remove("is-hidden"); }
 
       function setError(id, message) { document.getElementById(id).textContent = message; }
-      function clearErrors() { ["nameError", "businessError", "websiteError", "contactError"].forEach(function (id) { setError(id, ""); }); }
+      function clearErrors() { ["nameError", "businessError", "websiteError", "contactError", "teamSizeError", "businessAgeError"].forEach(function (id) { setError(id, ""); }); }
       function validUrl(value) { try { var parsed = new URL(value); return parsed.protocol === "http:" || parsed.protocol === "https:"; } catch (e) { return false; } }
       function getPayload() {
         return {
@@ -797,6 +797,8 @@ html { scroll-behavior: auto; }
           business: document.getElementById("businessName").value.trim(),
           website: noWebsite.checked ? "No website yet" : website.value.trim(),
           contact: document.getElementById("contact").value.trim(),
+          team_size: document.getElementById("teamSize").value,
+          business_age: document.getElementById("businessAge").value,
           message: document.getElementById("message").value.trim()
         };
       }
@@ -808,10 +810,12 @@ html { scroll-behavior: auto; }
         if (!noWebsite.checked && !payload.website) { setError("websiteError", "Add the website URL or select “I don't have a website yet.”"); ok = false; }
         else if (!noWebsite.checked && !validUrl(payload.website)) { setError("websiteError", "Enter a full URL beginning with http:// or https://."); ok = false; }
         if (!payload.contact) { setError("contactError", "Add a Telegram handle or phone number."); ok = false; }
+        if (!payload.team_size) { setError("teamSizeError", "Select your team size."); ok = false; }
+        if (!payload.business_age) { setError("businessAgeError", "Select how long the business has run."); ok = false; }
         return ok;
       }
       function summary(payload) {
-        return "FREE WEBSITE AUDIT REQUEST\n\nName: " + payload.name + "\nBusiness: " + payload.business + "\nWebsite: " + payload.website + "\nTelegram / phone: " + payload.contact + "\nMessage: " + (payload.message || "Not provided");
+        return "FREE WEBSITE AUDIT REQUEST\n\nName: " + payload.name + "\nBusiness: " + payload.business + "\nWebsite: " + payload.website + "\nTelegram / phone: " + payload.contact + "\nTeam size: " + (payload.team_size || "Not provided") + "\nBusiness lifespan: " + (payload.business_age || "Not provided") + "\nMessage: " + (payload.message || "Not provided");
       }
       function showSuccess(payload) {
         var text = summary(payload);
