@@ -838,13 +838,7 @@ html { scroll-behavior: auto; }
         return ok;
       }
       function summary(payload) {
-        return "FREE WEBSITE AUDIT REQUEST
-
-Name: " + payload.name + "
-Business: " + payload.business + "
-Website: " + payload.website + "
-Telegram / phone: " + payload.contact + "
-Message: " + (payload.message || "Not provided");
+        return "FREE WEBSITE AUDIT REQUEST\n\nName: " + payload.name + "\nBusiness: " + payload.business + "\nWebsite: " + payload.website + "\nTelegram / phone: " + payload.contact + "\nMessage: " + (payload.message || "Not provided");
       }
       function showSuccess(payload) {
         var text = summary(payload);
