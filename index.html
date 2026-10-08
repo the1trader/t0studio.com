@@ -121,12 +121,19 @@ transition: opacity .2s ease, transform .2s ease;
 .button[aria-disabled="true"] { opacity: .48; cursor: not-allowed; }
 .arrow { font-size: 17px; line-height: 1; }
 .hero {
-min-height: 760px;
-padding: 92px 0 72px;
+min-height: 100svh;
+padding: 110px 0 44px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+gap: 52px;
+}
+.hero-main {
 display: grid;
 grid-template-columns: 1.08fr .92fr;
 gap: 42px;
 align-items: center;
+width: 100%;
 }
 .hero-kicker, .section-label { font: 500 11px/1.4 var(--font-mono); color: var(--muted); }
 .hero-kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
@@ -147,10 +154,10 @@ a[aria-disabled="true"] { cursor: not-allowed; text-decoration-style: dotted; op
 .phone-notch { position: absolute; top: 22px; left: 50%; transform: translateX(-50%); width: 92px; height: 24px; border-radius: 12px; background: #0d100c; z-index: 3; }
 .phone-screen { position: absolute; inset: 12px; border-radius: 28px; background: #f3f4ee; overflow: hidden; }
 .phone-screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.trust-band { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); min-height: 100svh; display: flex; }
-.trust-band .shell { margin: auto; }
-.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 34px 0 8px; }
-.stat b { display: block; font-size: clamp(38px, 8vw, 54px); font-weight: 800; letter-spacing: -.04em; }
+.trust-band { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); }
+.trust-band .shell { padding: 26px 0; }
+.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: 100%; border-top: 1px solid var(--line); padding-top: 26px; }
+.stat b { display: block; font-size: clamp(30px, 4.5vw, 44px); font-weight: 800; letter-spacing: -.04em; }
 .stat span { font-size: 12px; font-weight: 600; color: var(--muted); }
 .tool-wall { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 18px 0 6px; }
 .tool-label { font: 500 10px/1.3 var(--font-mono); color: var(--muted); }
@@ -315,7 +322,8 @@ body.route-privacy .privacy-view { display: block; }
 .mobile-menu.open { display: flex; }
 .mobile-menu a { padding: 13px 14px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 700; color: var(--ink); }
 .mobile-menu a:hover { background: color-mix(in srgb, var(--ink) 7%, transparent); }
-.hero { grid-template-columns: 1fr; min-height: 0; padding-top: 72px; }
+.hero { min-height: 0; padding-top: 92px; gap: 40px; }
+.hero-main { grid-template-columns: 1fr; }
 .hero-visual { min-height: 520px; }
 .stats-row { grid-template-columns: repeat(3, 1fr); }
 .service-row { grid-template-columns: 1fr; }
@@ -456,6 +464,7 @@ html { scroll-behavior: auto; }
   <main class="main-view">
     <div class="main-only" id="top">
       <div class="shell hero">
+        <div class="hero-main">
         <div>
           <div class="hero-kicker">Web design / Search / Applied AI</div>
           <h1>Websites that win you customers.</h1>
@@ -479,15 +488,16 @@ html { scroll-behavior: auto; }
           </div>
           <div class="visual-tag">REAL BOOKING FLOW</div>
         </div>
+        </div>
+        <div class="stats-row" aria-label="Studio proof points">
+          <div class="stat"><b>4</b><span>client sites live</span></div>
+          <div class="stat"><b>48h</b><span>free audit turnaround</span></div>
+          <div class="stat"><b>5</b><span>services, one studio</span></div>
+        </div>
       </div>
 
       <div class="trust-band" aria-label="Why trust t0-studio">
         <div class="shell">
-          <div class="stats-row">
-            <div class="stat"><b>4</b><span>client sites live</span></div>
-            <div class="stat"><b>48h</b><span>free audit turnaround</span></div>
-            <div class="stat"><b>5</b><span>services, one studio</span></div>
-          </div>
           <div class="tool-wall">
             <span class="tool-label">BUILT ON WHAT YOUR CUSTOMERS USE</span>
             <span class="tool-badges"><b>KBZPay</b><b>Viber</b><b>Telegram</b><b>Facebook</b></span>
