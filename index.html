@@ -1,6 +1,22 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8MVBKX381W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    /* Consent mode: analytics stays off until the visitor accepts the cookie banner. */
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_personalization: 'denied',
+      ad_user_data: 'denied',
+      analytics_storage: 'denied'
+    });
+    gtag('js', new Date());
+
+    gtag('config', 'G-8MVBKX381W');
+  </script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light" />
@@ -306,6 +322,12 @@ footer { padding: 46px 0 96px; border-top: 1px solid var(--line); }
 .mobile-bar { display: none; position: fixed; z-index: 25; left: 10px; right: 10px; bottom: max(10px, env(safe-area-inset-bottom)); padding: 8px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); backdrop-filter: blur(15px); transition: transform .25s ease, opacity .25s ease; }
 .mobile-bar .button { width: 100%; min-height: 50px; }
 .mobile-bar.is-hidden { transform: translateY(calc(100% + 24px)); opacity: 0; pointer-events: none; }
+.consent-bar { position: fixed; z-index: 60; left: 10px; right: 10px; bottom: max(10px, env(safe-area-inset-bottom)); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow); font-size: 13px; color: var(--muted); }
+.consent-bar[hidden] { display: none; }
+.consent-bar p { margin: 0; max-width: 62ch; line-height: 1.55; }
+.consent-bar a { color: var(--ink); font-weight: 700; text-underline-offset: 3px; }
+.consent-actions { display: flex; gap: 10px; margin-left: auto; }
+@media (min-width: 720px) { .consent-bar { left: auto; right: 22px; bottom: 22px; max-width: 440px; } }
 body.route-audit .main-only,
 body.route-audit .nav,
 body.route-audit footer,
@@ -707,15 +729,25 @@ html { scroll-behavior: auto; }
     <div class="shell privacy-card">
       <a class="back-link" href="#top">← Back to t0-studio</a>
       <div class="section-label">PRIVACY</div>
-      <h1>Your audit details stay tied to your request.</h1>
+      <h1>Your data stays tied to your request.</h1>
+      <p>Last updated: October 2026.</p>
       <h2>What we collect</h2>
       <p>The audit form collects your name, business name, website status or URL, Telegram or phone contact, team size, business lifespan, and any optional message you add.</p>
+      <h2>Cookies and analytics</h2>
+      <p>We use Google Analytics 4 to understand how the site performs — which pages get visited and what kinds of devices and browsers people use. Google may store cookies in your browser for this.</p>
+      <p>Analytics is off until you accept the cookie banner. Decline, and no analytics cookies are set and no analytics data is collected. Clear this site's cookies in your browser settings any time and the banner will ask you again.</p>
       <h2>Why we collect it</h2>
       <p>We use the information to review your website or market opportunity, prepare the free audit, contact you about it, and scope a quote if the work is a fit.</p>
-      <h2>How to ask for deletion</h2>
-      <p>Contact t0-studio through the same channel you used for the request and ask for your audit details to be deleted. Once the Telegram or Facebook links are configured, they will appear in the site footer.</p>
-      <h2>Third parties</h2>
-      <p>Your details are not sold. If a lead endpoint is configured, the form sends the information only to that endpoint for handling the audit request.</p>
+      <h2>Who else sees it</h2>
+      <ul>
+        <li>Your details are never sold.</li>
+        <li>Audit requests go through our lead endpoint, which delivers them straight to us (currently as a Telegram message).</li>
+        <li>If you accept analytics cookies, Google Analytics processes the visit data above under Google's own privacy terms.</li>
+      </ul>
+      <h2>How long we keep it</h2>
+      <p>Audit details are kept while the conversation about your project is active. Ask any time and we delete them. Analytics data is kept under Google Analytics' standard retention settings.</p>
+      <h2>Asking for deletion</h2>
+      <p>Message t0-studio on <a class="telegram-link" href="#" style="font-weight:700;text-decoration:underline;text-underline-offset:3px;">Telegram</a> and ask for your audit details to be deleted.</p>
     </div>
   </main>
 
@@ -727,6 +759,14 @@ html { scroll-behavior: auto; }
   </footer>
 
   <div class="mobile-bar is-hidden" id="mobileBar"><a class="button accent" href="#audit">Get a free audit <span class="arrow" aria-hidden="true">↗</span></a></div>
+
+  <div class="consent-bar" id="consentBar" hidden>
+    <p>We use cookies for basic analytics (Google Analytics) to see how the site performs. No ads, no selling your data. <a href="#privacy">Privacy policy</a>.</p>
+    <div class="consent-actions">
+      <button type="button" class="button ghost button-sm" id="consentDecline">Decline</button>
+      <button type="button" class="button dark button-sm" id="consentAccept">Accept</button>
+    </div>
+  </div>
 
   <script>
     (function () {
@@ -766,6 +806,30 @@ html { scroll-behavior: auto; }
       Array.prototype.forEach.call(document.querySelectorAll('a[aria-disabled="true"]'), function (link) {
         link.addEventListener("click", function (event) { if (link.getAttribute("aria-disabled") === "true") { event.preventDefault(); } });
       });
+
+      /* Cookie consent for GA4. Analytics stays off until the visitor accepts. */
+      var consentBar = document.getElementById("consentBar");
+      function setConsent(granted) {
+        if (typeof gtag === "function") {
+          gtag("consent", "update", {
+            ad_storage: granted ? "granted" : "denied",
+            ad_personalization: granted ? "granted" : "denied",
+            ad_user_data: granted ? "granted" : "denied",
+            analytics_storage: granted ? "granted" : "denied"
+          });
+        }
+      }
+      function dismissConsent(choice) {
+        try { localStorage.setItem("t0-consent", choice); } catch (e) {}
+        consentBar.hidden = true;
+      }
+      var storedConsent = null;
+      try { storedConsent = localStorage.getItem("t0-consent"); } catch (e) {}
+      if (storedConsent === "accepted") { setConsent(true); }
+      else if (storedConsent === "declined") { setConsent(false); }
+      else { consentBar.hidden = false; }
+      document.getElementById("consentAccept").addEventListener("click", function () { setConsent(true); dismissConsent("accepted"); });
+      document.getElementById("consentDecline").addEventListener("click", function () { setConsent(false); dismissConsent("declined"); });
 
       function route() {
         var hash = window.location.hash;
@@ -842,6 +906,8 @@ html { scroll-behavior: auto; }
         document.getElementById("formFields").hidden = true;
         var panel = document.getElementById("successPanel");
         panel.classList.add("show"); panel.focus();
+        /* Lead tracking for GA4 (respects the cookie-banner consent choice). */
+        if (typeof gtag === "function") { gtag("event", "generate_lead", { method: "audit_form" }); }
         var send = document.getElementById("sendTelegram");
         if (TELEGRAM_URL) {
           send.href = TELEGRAM_URL + (TELEGRAM_URL.indexOf("?") === -1 ? "?" : "&") + "text=" + encodeURIComponent(text);
