@@ -169,7 +169,7 @@ a[aria-disabled="true"] { cursor: not-allowed; text-decoration-style: dotted; op
 .phone { position: relative; width: 250px; height: 520px; border-radius: 38px; background: #0d100c; padding: 12px; box-shadow: 0 30px 60px rgba(13,16,12,.35), inset 0 0 0 2px #2a3026; }
 .phone-notch { position: absolute; top: 22px; left: 50%; transform: translateX(-50%); width: 92px; height: 24px; border-radius: 12px; background: #0d100c; z-index: 3; }
 .phone-screen { position: absolute; inset: 12px; border-radius: 28px; background: #f3f4ee; overflow: hidden; }
-.phone-screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.phone-screen video { position: absolute; left: 0; right: 0; top: 40px; width: 100%; height: calc(100% - 40px); object-fit: cover; object-position: top center; display: block; }
 .trust-band { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); }
 .trust-band .shell { padding: 26px 0; }
 .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: 100%; border-top: 1px solid var(--line); padding-top: 18px; }
