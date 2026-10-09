@@ -507,7 +507,7 @@ html { scroll-behavior: auto; }
         <div class="hero-visual">
           <div class="phone" aria-label="Demo: Hair Garden booking flow">
             <div class="phone-screen">
-              <video id="bookingLoop" muted loop autoplay playsinline preload="auto" aria-label="Screen recording of the real Hair Garden booking flow"></video>
+              <video id="bookingLoop" muted loop autoplay playsinline preload="auto" aria-label="Animated demo of the t0-studio booking system for salon owners"></video>
             </div>
             <div class="phone-notch" aria-hidden="true"></div>
           </div>
@@ -964,7 +964,12 @@ html { scroll-behavior: auto; }
       els.forEach(function (el) { io.observe(el); });
     })();
 </script>
-<script src="assets/booking-loop.js"></script>
+<script src="assets/demo-booking-0.js"></script>
+<script src="assets/demo-booking-1.js"></script>
+<script src="assets/demo-booking-2.js"></script>
+<script src="assets/demo-booking-3.js"></script>
+<script src="assets/demo-booking-4.js"></script>
+<script>window.__BOOKING_LOOP="data:video/webm;base64,"+(window.__BOOKING_DEMO_PARTS||[]).join("");</script>
 <script>
 /* Hero phone: play the recorded real booking-flow loop */
 (function(){var v=document.getElementById("bookingLoop");if(!v||!window.__BOOKING_LOOP){return;}v.src=window.__BOOKING_LOOP;var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(reduce){v.removeAttribute("autoplay");}else{var p=v.play();if(p&&p.catch){p.catch(function(){});}}})();
