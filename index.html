@@ -264,8 +264,10 @@ h2 { margin: 0; max-width: 790px; font-size: clamp(38px, 5vw, 66px); line-height
 .tier-price { margin: 0; color: var(--accent); font: 500 13px/1.4 var(--font-mono); }
 .price-tier > p:not(.tier-price) { margin: 27px 0 0; color: var(--dark-muted); line-height: 1.65; }
 .price-tier .button { margin-top: auto; align-self: flex-start; }
-.care-line { display: flex; justify-content: space-between; gap: 20px; margin-top: 14px; padding: 20px 4px 0; border-top: 1px solid #343a31; color: var(--dark-muted); font-size: 13px; }
-.care-line strong { color: var(--dark-ink); }
+.care-line { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: 18px; padding: 22px 26px; border: 1px solid #343a31; border-radius: 16px; background: #14160f; }
+.care-copy b { display: block; color: var(--dark-ink); font-size: 17px; letter-spacing: -.01em; margin-bottom: 6px; }
+.care-copy span { color: #c6cabf; font-size: 15px; line-height: 1.55; }
+.care-price strong { color: var(--lime); font-size: 22px; white-space: nowrap; }
 .faq-list { border-top: 1px solid var(--line); }
 details { border-bottom: 1px solid var(--line); }
 summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 30px 1fr auto; gap: 14px; padding: 24px 0; align-items: center; font-weight: 700; }
@@ -318,6 +320,9 @@ footer { padding: 46px 0 96px; border-top: 1px solid var(--line); }
 .footer-line { font-size: clamp(29px, 4vw, 50px); letter-spacing: -.05em; line-height: 1.08; }
 .footer-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 15px; }
 .footer-links a { color: var(--muted); font-size: 12px; font-weight: 700; text-underline-offset: 4px; }
+.footer-brand { margin-bottom: 20px; }
+.footer-links a { display: inline-flex; align-items: center; gap: 7px; }
+.footer-links a svg { width: 15px; height: 15px; flex: none; }
 .footer-links a[hidden] { display: none; }
 .mobile-bar { display: none; position: fixed; z-index: 25; left: 10px; right: 10px; bottom: max(10px, env(safe-area-inset-bottom)); padding: 8px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); backdrop-filter: blur(15px); transition: transform .25s ease, opacity .25s ease; }
 .mobile-bar .button { width: 100%; min-height: 50px; }
@@ -404,7 +409,7 @@ body.route-audit .audit-wrap { min-height: calc(100vh - 20px); }
 .project-body { padding: 22px; }
 .result-grid { grid-template-columns: 1fr; }
 .result-note { min-height: 135px; }
-.care-line { flex-direction: column; }
+.care-line { flex-direction: column; align-items: flex-start; }
 details p { margin-left: 0; margin-right: 0; }
 .submit-row { display: grid; }
 .submit-row .button { width: 100%; }
@@ -664,7 +669,7 @@ html { scroll-behavior: auto; }
             <article class="price-tier featured"><small>02 / GROW</small><h3>Grow</h3><p class="tier-price" data-price="grow">Pricing to be set</p><p>Website, SEO, and social media marketing working as one acquisition system.</p><a class="button accent" href="#audit">Get a free audit</a></article>
             <article data-reveal class="price-tier"><small>03 / SCALE</small><h3>Scale</h3><p class="tier-price">Custom quote</p><p>Everything in Grow, plus AI automation and ongoing care shaped around the business.</p><a class="button accent" href="#audit">Get a free audit</a></article>
           </div>
-          <div class="care-line" data-reveal><span>Care plans for hosting, updates, monitoring, and small fixes.</span><strong>From $30/mo</strong></div>
+          <div class="care-line" data-reveal><div class="care-copy"><b>Care plans</b><span>Hosting, updates, monitoring, and small fixes — your site keeps earning after launch.</span></div><div class="care-price"><strong>From $30/mo</strong></div></div>
         </div>
       </section>
 
@@ -753,8 +758,11 @@ html { scroll-behavior: auto; }
 
   <footer>
     <div class="shell footer-inner" data-reveal>
-      <div class="footer-line">Make the website<br />earn its keep.</div>
-      <div class="footer-links"><a class="telegram-link" href="#" aria-disabled="true">Telegram</a><a class="facebook-link" href="#" aria-disabled="true">Facebook</a><a href="#privacy">Privacy</a></div>
+      <div>
+        <a class="brand footer-brand" href="#top" aria-label="t0-studio home"><svg viewBox="0 0 400 400" aria-hidden="true"><g><g stroke="#10120f" stroke-width="26" stroke-linecap="round"><line x1="296" y1="222" x2="352" y2="222"/><line x1="152" y1="138.9" x2="112" y2="72"/><line x1="152" y1="305.1" x2="112" y2="372"/></g><path d="M 296 222 L 248 305.1 L 152 305.1 L 104 222 L 152 138.9 L 248 138.9 Z" fill="none" stroke="#10120f" stroke-width="40" stroke-linejoin="round"/><circle cx="352" cy="222" r="24" fill="#10120f"/><circle cx="112" cy="72" r="24" fill="#10120f"/><circle cx="112" cy="372" r="24" fill="#10120f"/><rect x="183" y="170" width="34" height="104" rx="17" fill="#10120f"/><rect x="150" y="190" width="100" height="34" rx="17" fill="#10120f"/></g></svg><span class="brand-word">t0-studio</span></a>
+        <div class="footer-line">Make the website<br />earn its keep.</div>
+      </div>
+      <div class="footer-links"><a class="telegram-link" href="#" aria-disabled="true"><svg viewBox="0 0 24 24" fill="#26A5E4" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>Telegram</a><a class="facebook-link" href="#" aria-disabled="true"><svg viewBox="0 0 24 24" fill="#0866FF" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg>Facebook</a><a href="#privacy">Privacy</a></div>
     </div>
   </footer>
 
