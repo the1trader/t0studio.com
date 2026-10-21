@@ -517,6 +517,22 @@ footer{padding:40px 0 64px;}
 .review-note{margin:0;color:var(--muted);font-size:17px;line-height:1.6;font-weight:700;}
 .problem-intro{margin:18px 0 0;color:var(--muted);font-size:16px;line-height:1.7;max-width:420px;}
 .p-loss{display:block;margin-top:6px;color:var(--muted);font-size:13px;line-height:1.55;font-weight:400;}
+/* Problem cards, pro pass: kill the flex-row squeeze.
+   Icon tile + stacked copy: number pill, big title, loss below, full card width. */
+.problem-list{gap:16px;}
+.problem-item{display:grid;grid-template-columns:56px minmax(0,1fr);gap:20px;align-items:start;padding:28px;border-radius:20px;box-shadow:0 14px 36px rgba(20,28,17,.08);}
+.p-icon{width:56px;height:56px;border:0;border-radius:16px;background:var(--accent);color:var(--accent-ink);}
+.p-icon svg{width:26px;height:26px;}
+.p-copy{display:block;}
+.p-copy b{font-size:11px;padding:5px 10px;}
+.p-copy p{margin:12px 0 8px;font-size:22px;line-height:1.25;font-weight:800;letter-spacing:-.02em;}
+.p-loss{margin-top:0;font-size:15px;line-height:1.65;max-width:560px;}
+@media (max-width:760px){
+  .problem-item{grid-template-columns:48px minmax(0,1fr);gap:16px;padding:22px;}
+  .p-icon{width:48px;height:48px;}
+  .p-copy p{font-size:20px;}
+}
+
 .audit-wrap{background:
   radial-gradient(circle at 18% 22%, rgba(21,32,0,.10), transparent 34%),
   radial-gradient(circle at 82% 78%, rgba(255,255,255,.28), transparent 42%),
@@ -604,9 +620,9 @@ footer{padding:40px 0 64px;}
           </div>
           <div>
             <div class="problem-list">
-              <div class="problem-item" data-reveal><span class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span><div class="p-copy"><b>01</b><p>Customers find your competitor first.</p><span class="p-loss">On Google, Facebook, and AI answers, you are invisible — the enquiry goes to the shop that shows up first.</span></div></div>
-              <div class="problem-item" data-reveal><span class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span><div class="p-copy"><b>02</b><p>You are doing everything by hand.</p><span class="p-loss">Bookings, replies, and follow-ups on Messenger and phone. Slow replies lose bookings, especially after hours.</span></div></div>
-              <div class="problem-item" data-reveal><span class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 3l7 18 2.5-7.5L21 11z"/></svg></span><div class="p-copy"><b>03</b><p>Visitors leave without booking.</p><span class="p-loss">They do not get what you sell in seconds, and there is no easy way to book — so they go back to Facebook.</span></div></div>
+              <div class="problem-item" data-reveal><span class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span><div class="p-copy"><b>01</b><p>Customers find your competitor first.</p><span class="p-loss">Invisible on Google, Facebook, and AI answers — the enquiry goes to whoever shows up first.</span></div></div>
+              <div class="problem-item" data-reveal><span class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span><div class="p-copy"><b>02</b><p>You are doing everything by hand.</p><span class="p-loss">Bookings and replies on Messenger and phone. Slow replies lose bookings, especially after hours.</span></div></div>
+              <div class="problem-item" data-reveal><span class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 3l7 18 2.5-7.5L21 11z"/></svg></span><div class="p-copy"><b>03</b><p>Visitors leave without booking.</p><span class="p-loss">They do not get what you sell in seconds, and there is no easy way to book — so they leave.</span></div></div>
             </div>
             <p class="pivot" data-reveal>We build the system that wins them back.</p>
           </div>
