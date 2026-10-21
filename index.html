@@ -493,7 +493,38 @@ details[open] > p { animation: rise-in var(--t-fast) var(--ease) both; }
 html { scroll-behavior: auto; }
 *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 .js [data-reveal] { opacity: 1 !important; transform: none !important; }
-}</style>
+}
+/* --- Surgical space/background pass (branch, 2026-10-21) ---
+   Same light palette (#f3f4ee / #b7ff3c). No dark theme.
+   Only tightens empty vertical space and adds subtle depth. */
+body{background:
+  radial-gradient(1100px 560px at 88% -8%, rgba(183,255,60,.16), transparent 60%),
+  radial-gradient(900px 480px at -12% 28%, rgba(183,255,60,.09), transparent 55%),
+  var(--bg);}
+section{padding:72px 0;}
+.section-head{margin-bottom:32px;}
+.hero{min-height:0;padding:56px 0 32px;gap:24px;}
+.hero-visual{min-height:480px;}
+.problem{padding:64px 0 28px;}
+.audit-section{padding:20px 0 64px;}
+footer{padding:40px 0 64px;}
+.result-note{min-height:140px;}
+.result-note p{margin-top:20px;}
+.price-tier{min-height:0;}
+.tier-list{list-style:none;margin:18px 0 22px;padding:0;display:grid;gap:9px;}
+.tier-list li{position:relative;padding-left:22px;color:var(--dark-muted);font-size:14px;line-height:1.55;}
+.tier-list li::before{content:"✓";position:absolute;left:0;color:var(--accent);font:700 12px/1.55 var(--font-mono);}
+.review-note{margin:0;color:var(--muted);font-size:17px;line-height:1.6;font-weight:700;}
+.audit-wrap{background:
+  radial-gradient(circle at 18% 22%, rgba(21,32,0,.10), transparent 34%),
+  radial-gradient(circle at 82% 78%, rgba(255,255,255,.28), transparent 42%),
+  var(--accent);}
+@media (max-width:760px){
+  section{padding:56px 0;}
+  .hero{padding:48px 0 28px;}
+  .hero-visual{min-height:400px;}
+}
+</style>
 <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
@@ -658,7 +689,7 @@ html { scroll-behavior: auto; }
           </div>
           <div class="testimonial" data-reveal>
             <div class="review-person"><strong>Tony Meechai</strong><span>THE MEECHAI METHOD<br />themeechaimethod.com</span></div>
-            <blockquote class="review-quote pending" id="tonyReview">Full review coming soon.</blockquote>
+            <p class="review-note" id="tonyReview">Project live at themeechaimethod.com — written client review still to come.</p>
           </div>
           <div class="result-grid" aria-label="Project outcomes">
             <article data-reveal class="result-note"><b>BLACK HAT GOLF</b><p>A dedicated platform for the brand and its programs.</p></article>
@@ -691,9 +722,9 @@ html { scroll-behavior: auto; }
             <div><h2>Start with the level of support you need.</h2><p class="section-intro">The audit shows where the highest-value work is. Your quote stays fixed once the scope is approved.</p></div>
           </div>
           <div class="pricing-grid">
-            <article data-reveal class="price-tier"><small>01 / LAUNCH</small><h3>Launch</h3><p class="tier-price">From $450</p><p>A website that sells, with a clear offer and an enquiry path built for mobile.</p><a class="button accent" href="#audit">Get a free audit</a></article>
-            <article class="price-tier featured"><small>02 / GROW <span class="tier-badge">MOST COMPLETE</span></small><h3>Grow</h3><p class="tier-price" data-price="grow">Pricing to be set</p><p>Website, SEO, and social media marketing working as one acquisition system.</p><a class="button accent" href="#audit">Get a free audit</a></article>
-            <article data-reveal class="price-tier"><small>03 / SCALE</small><h3>Scale</h3><p class="tier-price">Custom quote</p><p>Everything in Grow, plus AI automation and ongoing care shaped around the business.</p><a class="button accent" href="#audit">Get a free audit</a></article>
+            <article data-reveal class="price-tier"><small>01 / LAUNCH</small><h3>Launch</h3><p class="tier-price">From $450</p><p>A website that sells, with a clear offer and an enquiry path built for mobile.</p><ul class="tier-list"><li>Mobile-first conversion layout</li><li>Clear offer and enquiry path</li><li>Design, copy, and launch</li></ul><a class="button accent" href="#audit">Get a free audit</a></article>
+            <article class="price-tier featured"><small>02 / GROW <span class="tier-badge">MOST COMPLETE</span></small><h3>Grow</h3><p class="tier-price" data-price="grow">Pricing to be set</p><p>Website, SEO, and social media marketing working as one acquisition system.</p><ul class="tier-list"><li>Website that sells</li><li>SEO and AI-search visibility</li><li>Social media publishing system</li></ul><a class="button accent" href="#audit">Get a free audit</a></article>
+            <article data-reveal class="price-tier"><small>03 / SCALE</small><h3>Scale</h3><p class="tier-price">Custom quote</p><p>Everything in Grow, plus AI automation and ongoing care shaped around the business.</p><ul class="tier-list"><li>Everything in Grow</li><li>AI automation and booking flows</li><li>Ongoing care, shaped per business</li></ul><a class="button accent" href="#audit">Get a free audit</a></article>
           </div>
           <div class="care-line" data-reveal><div class="care-copy"><b>Care plans</b><span>Hosting, updates, monitoring, and small fixes — your site keeps earning after launch.</span></div><div class="care-price"><strong>From $30/mo</strong></div></div>
         </div>
