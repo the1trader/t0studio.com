@@ -20,9 +20,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light" />
-  <title>t0-studio — Less work. More money. Automation for Myanmar businesses</title>
+  <title>t0-studio — More sales than your competitors. Automation for Myanmar businesses</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%2310120f%22%2F%3E%3Cg%20transform%3D%22translate%289%2C9%29%20scale%28.115%29%22%3E%3Cg%20stroke%3D%22%23b7ff3c%22%20stroke-width%3D%2226%22%20stroke-linecap%3D%22round%22%3E%3Cline%20x1%3D%22296%22%20y1%3D%22222%22%20x2%3D%22352%22%20y2%3D%22222%22%2F%3E%3Cline%20x1%3D%22152%22%20y1%3D%22139%22%20x2%3D%22112%22%20y2%3D%2272%22%2F%3E%3Cline%20x1%3D%22152%22%20y1%3D%22305%22%20x2%3D%22112%22%20y2%3D%22372%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M%20296%20222%20L%20248%20305%20L%20152%20305%20L%20104%20222%20L%20152%20139%20L%20248%20139%20Z%22%20fill%3D%22none%22%20stroke%3D%22%23b7ff3c%22%20stroke-width%3D%2240%22%20stroke-linejoin%3D%22round%22%2F%3E%3Ccircle%20cx%3D%22352%22%20cy%3D%22222%22%20r%3D%2224%22%20fill%3D%22%23b7ff3c%22%2F%3E%3Ccircle%20cx%3D%22112%22%20cy%3D%2272%22%20r%3D%2224%22%20fill%3D%22%23b7ff3c%22%2F%3E%3Ccircle%20cx%3D%22112%22%20cy%3D%22372%22%20r%3D%2224%22%20fill%3D%22%23b7ff3c%22%2F%3E%3Crect%20x%3D%22183%22%20y%3D%22170%22%20width%3D%2234%22%20height%3D%22104%22%20rx%3D%2217%22%20fill%3D%22%23b7ff3c%22%2F%3E%3Crect%20x%3D%22150%22%20y%3D%22190%22%20width%3D%22100%22%20height%3D%2234%22%20rx%3D%2217%22%20fill%3D%22%23b7ff3c%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" />
-  <meta name="description" content="Automation for Myanmar businesses — customers find you, book, and pay, without you chasing messages all day. Websites, SEO, and AI automation from t0-studio. Request a free 6-point website audit." />
+  <meta name="description" content="More sales than your competitors, with less manual work. Automation for Myanmar businesses — customers find you, book, and pay themselves. Websites, SEO, and AI automation from t0-studio. Request a free 6-point website audit." />
   <meta property="og:title" content="t0-studio — AI Automation · Web · Search" />
   <meta property="og:description" content="Design, SEO, and AI automation — one studio, built to bring business, not just look good." />
   <meta property="og:type" content="website" />
@@ -565,6 +565,12 @@ h1{font-size:clamp(44px,5vw,68px);line-height:1.0;letter-spacing:-.05em;max-widt
 @media (max-width:980px){
   .hero-video-card{min-height:480px;}
 }
+/* Hero pop pass (2026-10-22, branch only): headline was too generic and the
+   dark video card blended into black. Restore specificity + lime pop. */
+.hl{background:var(--accent);color:var(--accent-ink);padding:0 10px;border-radius:8px;-webkit-box-decoration-break:clone;box-decoration-break:clone;}
+.hero-video-card{border:2px solid var(--accent);box-shadow:0 24px 60px rgba(183,255,60,.22),0 24px 48px rgba(0,0,0,.25);}
+.hero-video-card video{object-fit:cover;object-position:center;}
+.video-caption{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:28px 20px 16px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.78));color:#fff;font-size:14px;font-weight:800;line-height:1.4;}
 .audit-wrap{background:
   radial-gradient(circle at 18% 22%, rgba(21,32,0,.10), transparent 34%),
   radial-gradient(circle at 82% 78%, rgba(255,255,255,.28), transparent 42%),
@@ -604,8 +610,8 @@ h1{font-size:clamp(44px,5vw,68px);line-height:1.0;letter-spacing:-.05em;max-widt
         <div class="hero-main">
         <div>
           <div class="hero-kicker">Myanmar-focused studio · Web / Search / Automation</div>
-          <h1>Less work.<br>More money.</h1>
-          <p class="hero-lede">Automation for Myanmar businesses. Customers find you, book, and pay — without you chasing messages all day.</p>
+          <h1><span class="hl">More sales</span> than your competitors.</h1>
+          <p class="hero-lede">Less manual work. Automation for Myanmar businesses — customers find you, book, and pay themselves.</p>
           <div class="hero-actions">
             <a class="button accent" href="#audit">Get a free audit <span class="arrow" aria-hidden="true">↗</span></a>
             <a class="text-link telegram-link" href="#audit" aria-disabled="true">Prefer to talk? Message us on Telegram</a>
@@ -619,6 +625,7 @@ h1{font-size:clamp(44px,5vw,68px);line-height:1.0;letter-spacing:-.05em;max-widt
         <div class="hero-visual hero-video-card">
           <video id="bookingLoop" muted loop autoplay playsinline preload="auto" aria-label="Animated demo of an automation booking flow"></video>
           <div class="visual-tag">AUTOMATION DEMO</div>
+          <div class="video-caption">Automation in action — bookings, replies, payments, handled.</div>
         </div>
         </div>
         <div class="stats-row" aria-label="Studio proof points">
