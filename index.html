@@ -556,6 +556,15 @@ h1{font-size:clamp(44px,5vw,68px);line-height:1.0;letter-spacing:-.05em;max-widt
   .hero-visual{min-height:0;padding:24px;}
   .phone{width:210px;height:430px;}
 }
+/* Hero video card (2026-10-22, branch only): no phone frame.
+   Video sits directly in the card, contained so the full demo stays visible.
+   Dark card background blends with the video's dark UI, so the side pillars
+   read as part of the video, not as empty card space. */
+.hero-video-card{padding:0;background:#0d100c;}
+.hero-video-card video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#0d100c;display:block;}
+@media (max-width:980px){
+  .hero-video-card{min-height:480px;}
+}
 .audit-wrap{background:
   radial-gradient(circle at 18% 22%, rgba(21,32,0,.10), transparent 34%),
   radial-gradient(circle at 82% 78%, rgba(255,255,255,.28), transparent 42%),
@@ -607,13 +616,8 @@ h1{font-size:clamp(44px,5vw,68px);line-height:1.0;letter-spacing:-.05em;max-widt
             <span class="proof-chip">Design, SEO &amp; AI under one roof</span>
           </div>
         </div>
-        <div class="hero-visual">
-          <div class="phone" aria-label="Demo: automation booking flow (illustration)">
-            <div class="phone-screen">
-              <video id="bookingLoop" muted loop autoplay playsinline preload="auto" aria-label="Animated demo of an automation booking flow"></video>
-            </div>
-            <div class="phone-notch" aria-hidden="true"></div>
-          </div>
+        <div class="hero-visual hero-video-card">
+          <video id="bookingLoop" muted loop autoplay playsinline preload="auto" aria-label="Animated demo of an automation booking flow"></video>
           <div class="visual-tag">AUTOMATION DEMO</div>
         </div>
         </div>
