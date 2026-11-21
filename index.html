@@ -170,6 +170,77 @@ a[aria-disabled="true"] { cursor: not-allowed; text-decoration-style: dotted; op
 .proof-chip { padding: 7px 11px; border: 1px solid var(--line); border-radius: 7px; color: var(--muted); font: 400 10px/1.35 var(--font-mono); background: color-mix(in srgb, var(--surface) 52%, transparent); }
 .hero-visual { position: relative; min-height: 580px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-l); background: linear-gradient(135deg, var(--surface-2), var(--surface)); box-shadow: var(--shadow); }
 .visual-tag { position: absolute; z-index: 2; top: 18px; left: 18px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 7px; background: var(--surface); color: var(--ink); font: 500 10px/1 var(--font-mono); }
+/* --- Hero outcome story: 10s loop, 3 beats --- */
+.hero-story { flex-direction: column; justify-content: center; gap: 8px; padding: 54px 20px 14px; }
+.story-pause { position: absolute; z-index: 3; top: 14px; right: 14px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font: 600 11px/1 var(--font-sans, system-ui, sans-serif); cursor: pointer; }
+.story-stage { display: flex; align-items: center; justify-content: center; gap: 26px; width: 100%; }
+.story-salon { position: relative; width: 210px; flex: none; }
+.story-salon svg { display: block; width: 100%; height: auto; }
+.salon-label { position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%); white-space: nowrap; padding: 7px 10px; border-radius: 999px; background: #10120f; color: #f3f4ee; font: 600 11px/1 var(--font-sans, system-ui, sans-serif); }
+.story-phone { width: 216px; height: 448px; flex: none; }
+.booking-ui { position: absolute; inset: 0; padding: 52px 14px 14px; background: #f3f4ee; font-family: var(--font-sans, system-ui, sans-serif); }
+.booking-head { display: flex; align-items: center; gap: 8px; padding-bottom: 10px; border-bottom: 1px solid rgba(16,18,15,.12); }
+.booking-head b { display: block; font-size: 13px; color: #10120f; }
+.booking-head div span { display: block; font-size: 10px; color: rgba(16,18,15,.6); }
+.booking-avatar { width: 32px; height: 32px; flex: none; display: grid; place-items: center; text-align: center; line-height: 1; border-radius: 50%; background: #10120f; color: #b7ff3c; font-size: 11px; font-weight: 700; }
+.booking-live { margin-left: auto; display: flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; color: #1c7a3d; }
+.booking-live i { width: 7px; height: 7px; border-radius: 50%; background: #1c7a3d; animation: liveDot 10s linear infinite; }
+.booking-msg { margin: 12px 0; padding: 10px 12px; border-radius: 12px 12px 12px 4px; background: #fff; box-shadow: 0 2px 8px rgba(16,18,15,.08); font-size: 12px; line-height: 1.45; color: #10120f; }
+.booking-msg span { display: block; margin-top: 4px; font-size: 10px; color: rgba(16,18,15,.55); }
+.booking-list { display: flex; flex-direction: column; gap: 8px; }
+.booking-item { padding: 10px 12px; border-radius: 10px; background: #fff; box-shadow: 0 2px 8px rgba(16,18,15,.08); font-size: 12px; color: #10120f; }
+.booking-item { display: flex; justify-content: space-between; align-items: center; gap: 8px; white-space: nowrap; }
+.booking-empty { margin: 12px 0; padding: 14px 12px; border: 1px dashed rgba(16,18,15,.3); border-radius: 10px; text-align: center; font-size: 12px; color: rgba(16,18,15,.55); }
+.booking-item span { float: right; color: #1c7a3d; font-size: 10px; font-weight: 700; }
+.booking-total { margin-top: 12px; padding: 12px; border-radius: 12px; background: #10120f; color: #f3f4ee; font-size: 13px; }
+.booking-total span { display: block; margin-top: 3px; font-size: 10px; color: rgba(243,244,238,.7); }
+.story-captions { position: relative; width: 100%; height: 58px; }
+.story-caption { position: absolute; inset: 0; margin: 0; text-align: center; }
+.story-caption b { display: block; font-size: 17px; color: var(--ink); }
+.story-caption span { display: block; margin-top: 4px; font-size: 12px; color: var(--ink-2, rgba(16,18,15,.65)); }
+/* beat timing: beat1 0-30%, beat2 30-70%, beat3 70-100% of a 10s loop */
+.beat-1 { opacity: 0; animation: beat1 10s linear infinite; }
+.beat-2 { opacity: 0; animation: beat2 10s linear infinite; }
+.beat-3 { opacity: 1; animation: beat3 10s linear infinite; }
+@keyframes beat1 { 0%, 29% { opacity: 1; } 30%, 100% { opacity: 0; } }
+@keyframes beat2 { 0%, 29% { opacity: 0; } 30%, 69% { opacity: 1; } 70%, 100% { opacity: 0; } }
+@keyframes beat3 { 0%, 69% { opacity: 0; } 70%, 100% { opacity: 1; } }
+.bi-1 { opacity: 1; animation: bi1 10s linear infinite; }
+.bi-2 { opacity: 1; animation: bi2 10s linear infinite; }
+.bi-3 { opacity: 1; animation: bi3 10s linear infinite; }
+.bi-4 { opacity: 1; animation: bi4 10s linear infinite; }
+@keyframes bi1 { 0%, 34% { opacity: 0; transform: translateY(6px); } 40%, 100% { opacity: 1; transform: none; } }
+@keyframes bi2 { 0%, 44% { opacity: 0; transform: translateY(6px); } 50%, 100% { opacity: 1; transform: none; } }
+@keyframes bi3 { 0%, 54% { opacity: 0; transform: translateY(6px); } 60%, 100% { opacity: 1; transform: none; } }
+@keyframes bi4 { 0%, 64% { opacity: 0; transform: translateY(6px); } 70%, 100% { opacity: 1; transform: none; } }
+.owner-worry { opacity: 1; animation: worry 10s linear infinite; }
+@keyframes worry { 0%, 69% { opacity: 1; } 70%, 100% { opacity: 0; } }
+.owner-smile { opacity: 1; animation: beat3 10s linear infinite; }
+.story-phone { animation: buzz 10s linear infinite; }
+@keyframes buzz { 0%, 29% { transform: rotate(0); } 31% { transform: rotate(-2deg); } 33% { transform: rotate(2deg); } 35% { transform: rotate(-1deg); } 37%, 100% { transform: rotate(0); } }
+@keyframes liveDot { 0%, 29% { opacity: .35; } 30%, 100% { opacity: 1; } }
+.story-paused .beat-1, .story-paused .beat-2, .story-paused .beat-3, .story-paused .bi-1, .story-paused .bi-2, .story-paused .bi-3, .story-paused .bi-4, .story-paused .owner-worry, .story-paused .owner-smile, .story-paused .story-phone, .story-paused .booking-live i { animation-play-state: paused !important; }
+/* founder chip */
+.founder-chip { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; padding: 6px 14px 6px 6px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); text-decoration: none; font-size: 13px; }
+.founder-chip img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid #b7ff3c; }
+.founder-chip b { font-weight: 700; }
+/* static final frame on small screens and reduced motion */
+@media (max-width: 760px) {
+  .hero-story { min-height: 0; padding-top: 52px; }
+  .story-stage { flex-direction: column; gap: 14px; }
+  .story-salon { width: 150px; }
+  .story-phone { width: 200px; height: 416px; }
+  .hero-story * { animation: none !important; }
+  .hero-story .beat-1, .hero-story .beat-2, .hero-story .owner-worry { opacity: 0 !important; }
+  .hero-story .beat-3, .hero-story .owner-smile, .hero-story .booking-item { opacity: 1 !important; transform: none !important; }
+  .story-pause { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-story * { animation: none !important; }
+  .hero-story .beat-1, .hero-story .beat-2, .hero-story .owner-worry { opacity: 0 !important; }
+  .hero-story .beat-3, .hero-story .owner-smile, .hero-story .booking-item { opacity: 1 !important; transform: none !important; }
+  .story-pause { display: none; }
+}
 .phone { position: relative; width: 250px; height: 520px; border-radius: 38px; background: #0d100c; padding: 12px; box-shadow: 0 30px 60px rgba(13,16,12,.35), inset 0 0 0 2px #2a3026; }
 .phone-notch { position: absolute; top: 22px; left: 50%; transform: translateX(-50%); width: 92px; height: 24px; border-radius: 12px; background: #0d100c; z-index: 3; }
 .phone-screen { position: absolute; inset: 12px; border-radius: 28px; background: #f3f4ee; overflow: hidden; }
@@ -530,16 +601,68 @@ html { scroll-behavior: auto; }
             <a class="button accent" href="#audit">Get a free audit <span class="arrow" aria-hidden="true">↗</span></a>
             <a class="text-link telegram-link" href="https://t.me/Thomas_t000" target="_blank" rel="noopener noreferrer">Prefer to talk? Message us on Telegram</a>
           </div>
+          <a class="founder-chip" href="https://t.me/Thomas_t000" target="_blank" rel="noopener noreferrer">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5Ojf/2wBDAQoKCg0MDRoPDxo3JR8lNzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzf/wAARCABgAGADASIAAhEBAxEB/8QAHAAAAQUBAQEAAAAAAAAAAAAABQIDBAYHAQAI/8QANBAAAgEDAwEHAgYBBAMAAAAAAQIDAAQRBRIhMQYTIkFRYXGBkRQjMkKhsQcVJDVSQ9Hw/8QAGQEAAgMBAAAAAAAAAAAAAAAAAQIAAwQF/8QAIBEAAgIBBQEBAQAAAAAAAAAAAAECERIDEyExQVEEIv/aAAwDAQACEQMRAD8A1faR1FLVV9MU4rhwNu1viksCTxV5n4EOuTxXAhNL2H15rm1gaKAcEX/Y/aumNR6mu5x1pSk++KgaEBRzwQPKkMGICgfJp/INNOzbsLQZBQgVV3O2G8gOa6pI9hSQOf1faunB6N0pUNwPBgRgD5od2g1UaPpj3fdFyDgDJ9Pbk/SpgO0daRIsdwvdzRiVD+1lyDTULZn6Xcls+6NiHznIPOfWrBpnafLiO/jZlJ4kHBX6UDXZGCBggDJriyRckDIPkcVk3GugF+tb+wuh/tnWTHBGcH7U++M+EY+azwOj4MeVceYJ4qXbaxqFlIPzHIPJV/Ep+9PHV+hUi6iKSRuMfJ4pw2pC+J8t/AoVpev290cS4gfGOT4SfY0ZZ36qNwqxOxuCK0Tjw5HtimnhZfX6c1OVmYeJMUmR0XzB9qayNEZIsdT9684Rf3Z9hUlgqjc5AFNR9yThVJ9TijYKEKd3G3AHnTyxIakKqjyFL8A9KGQcTLSwOXCyBfJjgcUgYkQhnyucFtufjgU82w4CAv6RvjJ980iSMrKMRjHQk9B9q524hBIAVR3XHPOOPpXWuFwpQEhs4G7Of/VSIrBGAMskajrhDzj156V2aztdu+ByZR0JHDD0OPOl3oWHF0RztbnayY64NE9L1e8sfyw3fQn9j5yB7ULkdQwCDJxkr0x8+9cEyNncznz2E9KeOrXRC82eqWt2oYSNC56qTxn0zU3KRkFVLPnOcZrOxeJFtlWcbTwPI/X1orZavMoXZLx1KkjFaYaql2DJouMpjch5nIXPAI60lHfOIowq+RzQX/XmGAtqmMZyWNeTW5m4eJAc9Nx6VckHciGmmEIZ5Wwq9T0Ari3UV7A34WQkcqXUdDQefWbLuitxuiB4B4aq/c67aWrPJYXbRTqwIUqDvB4O70+BSSkl6TNMiG1BgkQyG4GeBvK7j5jNMvfSWrmOeKQKz4DMM/z0oPBr7zrgx5jlTouPE/vT14zxIGhij55LFice1ctacrqQCcupJePNEinavICx7j801aapK080LkS922wKVKk/z1ofBMt0guZGjt2ZsDx7Q/UGlnu+6Yu7bsZZo28P3P8A9zTbaXFE5HLrUZLS6Md1cNHGPEg2+JwenyB51IhuxduGhVWJOBg4BHv50ElvbZBCk6tOqsd28ZcD2IPtUtVt5dkkEzADxIWGGHPQ4/urVH+QEnU5tsLpEZP1AjC+EZz9SK9pKzqCsrkBlGQOn0pnvdRmmDQWbNDk71ZCccdQaa0201SW4IW1uixz4mFWKDxoFE+K7WS4ZN2VVuCpIx7GpIup4ZWlTYVIyWySMeWacj7K3/4w3ciR28f7yX3Fxjrt9f7qJr9mljbLHBcyuHPiZ4toUD28/ShNOPRKIN1qEV28ohZmKnDAeZqv3jTf+PIywwOQanacLaDvDGwXgDaSev1pUozKjtu3dcAcVXFpSshdbTsLo1u+QbpiOT+bjJ+lT37MabJCsQR1QdMyHJz80S7w546eXFLD81vwj8GBcHZHSI8ZgDY5AbmiMegaUp8NpF9VqQkh6U8hJIB4o4r4QAdp30Xs/ppuZ7OFnbIiiVAC7fPkPU1j+pdo9QuZzMtx+GQnwpANqr8VoH+Wl/455ATEyyLgnHOQf6qix9n59QtY7oqY4myQmOgotxirY8YOfRZuxnbue3QW2ssbuGRwTKzeOMH+xWrQqjBZIyCrAMpHmDXz7c6S1pF3kZbIHGa3Dsg0jdl9IMoJke1Qmomn0NKDi6YaKB1xVI7f6L34F413OZHbZHEDnC8cAe2CST1J9qtuo3yafZPPMMlcAKOrHPlVA7Rdory/upLOaA26IN0cWPEVPQn1/qsv6dWKVeiMrcdkbYp3nAQEEg8kn1FNHuY0LcksfXJon+DiCDvpXYsmNobofehuocvIfDtbHhzzxWDT1MpULRqueef5pakjy+xqN3gHDHHrTke6R1RRlmOAPWu1wQkLIOhYD61IR+OoonFaxxwpEVDYGOVByfrTNzBZQxmSfZGvryv9UmaHUH4VPttpFxrFna7ButoZg0q45U/9vtkfWq32phuYjHFZSLGi4AQMwwPpRLW+23501jpmEtN2xps+NyMFiD5Dyx80K1DU4b5gE8Ug4IB5rLrNuSaOj+eKUKYA1qxuIbtIJX4Ch/Euc5rZ+zohh7NabJIVTFsh6deOg9/asV1a9naV57lZtqjbufqBnGKsdnrOhajdvPL+PuCI4o4dLAU95Io2ghmO0AeQ49asjlRVrpeB3tJq1rq0tvFbWN9JcNwLd4irYyQHAJ9c1V9YsLlXeHupRfRMYzG95HLhMcDbkNRXXD2glsbeK3uLXTLOQSILWwmLyIFP6ZJ+v6sghfPzrLdIgjkmulkgSVA4LOy7jnJHWqtqNt+mRotjWOpw2ii5t7hscBktzwPmhN7L3T8krjruG3+K0rQv8f8AZia1E1vcT3jfvkguWjUH0wp4owOyOkxJtVLzb05v5m/gsaK0Y9gxP//Z" alt="Thomas, founder of t0-studio" width="44" height="44" loading="lazy">
+            <span><b>Built by Thomas</b> &mdash; the person who answers your messages.</span>
+          </a>
         </div>
-        <div class="hero-visual">
-          <div class="phone" aria-label="Demo: Hair Garden booking flow">
-            <div class="phone-screen">
-              <video id="bookingLoop" muted loop autoplay playsinline preload="auto" aria-label="Animated demo of the t0-studio booking system for salon owners"></video>
+        <div class="hero-visual hero-story" id="heroStory">
+          <div class="visual-tag">EMPTY CHAIR &rarr; FULL BOOKINGS</div>
+          <button class="story-pause" id="storyPause" type="button" aria-pressed="false" aria-label="Pause the hero animation">Pause</button>
+          <div class="story-stage">
+            <div class="story-salon" aria-hidden="true">
+              <svg viewBox="0 0 240 300" role="presentation">
+                <rect x="18" y="16" width="88" height="108" rx="12" fill="#e9ebdf" stroke="#10120f" stroke-opacity=".14" stroke-width="2"/>
+                <rect x="28" y="26" width="68" height="88" rx="8" fill="#f7f8f1"/>
+                <rect x="28" y="196" width="58" height="30" rx="8" fill="#10120f"/>
+                <path d="M22 226 h70 v10 a6 6 0 0 1 -6 6 h-58 a6 6 0 0 1 -6 -6 z" fill="#10120f"/>
+                <rect x="52" y="242" width="10" height="36" fill="#10120f"/>
+                <rect x="30" y="276" width="54" height="7" rx="3.5" fill="#10120f"/>
+                <circle cx="206" cy="238" r="14" fill="#b7ff3c" opacity=".6"/>
+                <circle cx="192" cy="244" r="9" fill="#10120f" opacity=".8"/>
+                <circle cx="220" cy="244" r="9" fill="#10120f" opacity=".5"/>
+                <rect x="192" y="252" width="28" height="26" rx="4" fill="#10120f"/>
+                <g class="owner-worry">
+                  <circle cx="155" cy="92" r="23" fill="#e8b98a"/>
+                  <path d="M132 90 a23 23 0 0 1 46 0 l-4 -2 a19 19 0 0 0 -38 0 z" fill="#10120f"/>
+                  <rect x="124" y="120" width="62" height="68" rx="14" fill="#10120f"/>
+                  <path d="M147 118 q8 5 16 0" stroke="#10120f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                </g>
+                <g class="owner-smile">
+                  <circle cx="155" cy="92" r="23" fill="#e8b98a"/>
+                  <path d="M132 90 a23 23 0 0 1 46 0 l-4 -2 a19 19 0 0 0 -38 0 z" fill="#10120f"/>
+                  <rect x="124" y="120" width="62" height="68" rx="14" fill="#10120f"/>
+                  <path d="M145 116 q10 10 20 0" stroke="#10120f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                  <circle cx="139" cy="106" r="3.5" fill="#d97b6c" opacity=".7"/>
+                  <circle cx="171" cy="106" r="3.5" fill="#d97b6c" opacity=".7"/>
+                </g>
+              </svg>
+              <div class="salon-label beat-1">No customers today</div>
+              <div class="salon-label beat-3">Full chairs today</div>
             </div>
-            <div class="phone-notch" aria-hidden="true"></div>
+            <div class="phone story-phone" aria-label="Phone showing Hair Garden bookings filling up">
+              <div class="phone-screen">
+                <div class="booking-ui">
+                  <div class="booking-head"><span class="booking-avatar">HG</span><div><b>Hair Garden</b><span>Yangon &middot; bookings</span></div><span class="booking-live"><i></i>Live</span></div>
+                  <div class="booking-msg beat-1">&ldquo;Hi, do you have a slot today?&rdquo;<span>2h ago &middot; no reply</span></div>
+                  <div class="booking-empty beat-1">No bookings yet today</div>
+                  <div class="booking-list">
+                    <div class="booking-item bi-1">9:00 &mdash; May <span>Booked</span></div>
+                    <div class="booking-item bi-2">10:30 &mdash; Aye <span>Booked</span></div>
+                    <div class="booking-item bi-3">13:00 &mdash; Thiri <span>Booked</span></div>
+                    <div class="booking-item bi-4">15:30 &mdash; Hnin <span>Booked</span></div>
+                  </div>
+                  <div class="booking-total beat-3">Today: <b>12 bookings</b><span>4 more than yesterday</span></div>
+                </div>
+              </div>
+              <div class="phone-notch" aria-hidden="true"></div>
+            </div>
           </div>
-          <div class="visual-tag">BOOKING SYSTEM DEMO</div>
-        </div>
+          <div class="story-captions">
+            <p class="story-caption beat-1"><b>&#x1019;&#x1016;&#x103c;&#x1031;&#x101b;&#x101e;&#x1031;&#x1038;&#x1010;&#x1032;&#x1037; message</b><span>Missed messages = missed money.</span></p>
+            <p class="story-caption beat-2"><b>Booking &#x1010;&#x103d;&#x1031; &#x101d;&#x1004;&#x103a;&#x101c;&#x102c;&#x1015;&#x103c;&#x102e;</b><span>Bookings come in &mdash; even while you work.</span></p>
+            <p class="story-caption beat-3"><b>&#x1012;&#x102e;&#x1014;&#x1031;&#x1037; 12 bookings</b><span>Full chairs. More sales.</span></p>
+          </div>
         </div>
         <div class="stats-row" aria-label="Studio proof points">
           <div class="stat"><b>4</b><span>client sites live</span></div>
@@ -739,7 +862,7 @@ html { scroll-behavior: auto; }
               </div>
               <div class="success-panel" id="successPanel" tabindex="-1">
                 <h3>Audit request ready.</h3>
-                <p>Your details are formatted below. Copy them for your records or send them through Telegram once the studio link is configured.</p>
+                <p>Your details are formatted below. Copy them for your records, or send them straight through Telegram &mdash; the studio link is ready.</p>
                 <pre class="lead-summary" id="leadSummary"></pre>
                 <div class="success-actions"><button class="button dark" type="button" id="copyDetails">Copy details</button><a class="button ghost" id="sendTelegram" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">Send via Telegram</a></div>
                 <p class="form-status" id="copyStatus" role="status" aria-live="polite"></p>
@@ -1011,15 +1134,18 @@ html { scroll-behavior: auto; }
       els.forEach(function (el) { io.observe(el); });
     })();
 </script>
-<script src="assets/demo-booking-0.js"></script>
-<script src="assets/demo-booking-1.js"></script>
-<script src="assets/demo-booking-2.js"></script>
-<script src="assets/demo-booking-3.js"></script>
-<script src="assets/demo-booking-4.js"></script>
-<script>window.__BOOKING_LOOP="data:video/webm;base64,"+(window.__BOOKING_DEMO_PARTS||[]).join("");</script>
 <script>
-/* Hero phone: play the recorded real booking-flow loop */
-(function(){var v=document.getElementById("bookingLoop");if(!v||!window.__BOOKING_LOOP){return;}v.src=window.__BOOKING_LOOP;var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(reduce){v.removeAttribute("autoplay");}else{var p=v.play();if(p&&p.catch){p.catch(function(){});}}})();
+/* Hero story: pause / play the 10s outcome loop */
+(function () {
+  var story = document.getElementById("heroStory");
+  var btn = document.getElementById("storyPause");
+  if (!story || !btn) { return; }
+  btn.addEventListener("click", function () {
+    var paused = story.classList.toggle("story-paused");
+    btn.textContent = paused ? "Play" : "Pause";
+    btn.setAttribute("aria-pressed", paused ? "true" : "false");
+  });
+})();
 </script>
 <script src="assets/shots-a.js"></script>
 <script src="assets/shots-b.js"></script>
